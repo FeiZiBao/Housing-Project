@@ -158,7 +158,13 @@ Order by Offered;
 Select FP, COUNT(FP) 
 From PortfolioProject.dbo.HiringData
 Group By FP
-	
+
+--Offered vs Filled rate
+Select Count(Filled) as 'Position Filled', count(Offered) as 'Offered',FP, 
+cast(count(filled) as decimal(7,2))/cast(count(offered) as decimal(7,2))*100 as 'Hiring Rate'
+From PortfolioProject.dbo.HiringData
+Where Offered is not null
+Group by FP
 
 --Deleting and renaming coloumns
 SELECT *
